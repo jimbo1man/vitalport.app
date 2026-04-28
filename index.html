@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vitalport — Export Apple Health Your Way</title>
+<meta name="description" content="Vitalport exports and routes your Apple Health data with the detail and reliability the built-in tools can't match. Workout type fidelity. Clean UI. Reliable sync.">
+<meta property="og:title" content="Vitalport — Export Apple Health Your Way">
+<meta property="og:description" content="Your health data, actually useful. Export steps, sleep, HRV, and workouts broken down by type — in clean JSON or CSV, on your schedule.">
+<meta property="og:image" content="https://vitalport.app/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --graphite: #1A2B3C;
+    --graphite-light: #243545;
+    --steel: #4A90B8;
+    --steel-dim: #3a738f;
+    --green: #5DB88A;
+    --green-dim: #4a9a72;
+    --white: #F0F4F8;
+    --muted: #8BA4B8;
+    --surface: #111d28;
+    --surface2: #0d1820;
+    --border: rgba(74, 144, 184, 0.15);
+    --border-hover: rgba(74, 144, 184, 0.35);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--surface2);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── GRID LINES ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(74,144,184,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,144,184,0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(13, 24, 32, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .nav-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .nav-wordmark {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--white);
+    letter-spacing: -0.02em;
+  }
+
+  .nav-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--green);
+    text-decoration: none;
+    border: 0.5px solid var(--green);
+    padding: 6px 16px;
+    border-radius: 2px;
+    transition: background 0.2s, color 0.2s;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-cta:hover {
+    background: var(--green);
+    color: var(--graphite);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 0 4rem;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--green);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.1s;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--green);
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+
+  h1 .line-steel { color: var(--steel); }
+  h1 .line-dim { color: var(--muted); font-weight: 400; }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 3rem;
+    font-weight: 300;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.35s;
+  }
+
+  .hero-sub strong {
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  /* ── EMAIL FORM ── */
+  .email-form {
+    display: flex;
+    gap: 0;
+    max-width: 460px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.5s;
+  }
+
+  .email-input {
+    flex: 1;
+    background: rgba(255,255,255,0.05);
+    border: 0.5px solid var(--border-hover);
+    border-right: none;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 0.85rem 1.25rem;
+    border-radius: 2px 0 0 2px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    -webkit-appearance: none;
+  }
+
+  .email-input::placeholder { color: var(--muted); opacity: 0.6; }
+  .email-input:focus {
+    border-color: var(--steel);
+    background: rgba(74, 144, 184, 0.06);
+  }
+
+  .email-btn {
+    background: var(--steel);
+    border: 0.5px solid var(--steel);
+    color: var(--graphite);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    padding: 0.85rem 1.5rem;
+    border-radius: 0 2px 2px 0;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .email-btn:hover {
+    background: #5aa3ce;
+    border-color: #5aa3ce;
+  }
+
+  .email-note {
+    margin-top: 0.75rem;
+    font-size: 11px;
+    color: var(--muted);
+    opacity: 0.6;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.04em;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.6s;
+  }
+
+  /* ── PULSE DECORATION ── */
+  .hero-pulse {
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.12;
+    pointer-events: none;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    margin-bottom: 3rem;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--green);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 1px;
+    background: var(--green);
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    color: var(--white);
+  }
+
+  /* ── DIFFERENTIATORS ── */
+  .diff-section {
+    padding: 6rem 0;
+    border-top: 0.5px solid var(--border);
+  }
+
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 0.5px solid var(--border);
+    margin-top: 3rem;
+  }
+
+  .diff-card {
+    background: var(--surface);
+    padding: 2rem 1.75rem;
+    position: relative;
+    transition: background 0.25s;
+  }
+
+  .diff-card:hover {
+    background: var(--graphite-light);
+  }
+
+  .diff-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 1.25rem;
+    opacity: 0.5;
+  }
+
+  .diff-icon {
+    margin-bottom: 1rem;
+  }
+
+  .diff-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--white);
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.01em;
+  }
+
+  .diff-body {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ── WORKOUT FIDELITY SHOWCASE ── */
+  .fidelity-section {
+    padding: 6rem 0;
+    border-top: 0.5px solid var(--border);
+  }
+
+  .fidelity-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 0.5px solid var(--border);
+    margin-top: 3rem;
+  }
+
+  .fidelity-panel {
+    background: var(--surface);
+    padding: 2rem;
+  }
+
+  .fidelity-panel-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .fidelity-panel-label.bad { color: #c0392b; opacity: 0.7; }
+  .fidelity-panel-label.good { color: var(--green); }
+
+  .workout-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 0.5px solid var(--border);
+    font-size: 0.875rem;
+  }
+
+  .workout-row:last-child { border-bottom: none; }
+
+  .workout-name {
+    color: var(--white);
+    font-weight: 400;
+  }
+
+  .workout-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+  }
+
+  .workout-val.green { color: var(--green); }
+  .workout-val.muted { color: var(--muted); opacity: 0.5; }
+
+  .workout-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  .tag-strength { background: rgba(93,184,138,0.12); color: var(--green); }
+  .tag-hiit { background: rgba(74,144,184,0.12); color: var(--steel); }
+  .tag-walk { background: rgba(139,164,184,0.12); color: var(--muted); }
+
+  /* ── PRIVACY ── */
+  .privacy-section {
+    padding: 5rem 0;
+    border-top: 0.5px solid var(--border);
+  }
+
+  .privacy-statement {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2.5rem;
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-left: 3px solid var(--green);
+  }
+
+  .privacy-icon { flex-shrink: 0; margin-top: 2px; }
+
+  .privacy-headline {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--white);
+    margin-bottom: 0.4rem;
+  }
+
+  .privacy-body {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ── BOTTOM CTA ── */
+  .bottom-cta {
+    padding: 6rem 0;
+    border-top: 0.5px solid var(--border);
+    text-align: center;
+  }
+
+  .bottom-cta h2 { margin-bottom: 1rem; }
+  .bottom-cta p {
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    font-size: 1rem;
+  }
+
+  .bottom-form {
+    display: flex;
+    gap: 0;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2rem;
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    opacity: 0.5;
+    letter-spacing: 0.06em;
+  }
+
+  .footer-tagline {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    opacity: 0.4;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── SUCCESS STATE ── */
+  .success-msg {
+    display: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--green);
+    letter-spacing: 0.06em;
+    padding: 0.85rem 0;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .success-msg.show { display: flex; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulseLine {
+    0%, 100% { opacity: 0.06; }
+    50% { opacity: 0.14; }
+  }
+
+  .hero-pulse { animation: pulseLine 4s ease-in-out infinite; }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .email-form, .bottom-form { flex-direction: column; }
+    .email-input { border-right: 0.5px solid var(--border-hover); border-bottom: none; border-radius: 2px 2px 0 0; }
+    .email-btn { border-radius: 0 0 2px 2px; padding: 0.85rem; }
+    .fidelity-compare { grid-template-columns: 1fr; }
+    .hero-pulse { display: none; }
+    nav { padding: 1rem 1.25rem; }
+    .privacy-statement { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg class="nav-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="32" height="32" rx="7" fill="#1A2B3C"/>
+      <polyline points="6,7 16,22 26,7" fill="none" stroke="#4A90B8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="2,27 7,27 9.5,22 12,29 14.5,19 17,27 30,27" fill="none" stroke="#5DB88A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="16" cy="22" r="1.5" fill="#5DB88A"/>
+    </svg>
+    <span class="nav-wordmark">Vitalport</span>
+  </a>
+  <a href="#notify" class="nav-cta">GET EARLY ACCESS</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <p class="hero-eyebrow">Coming to the App Store</p>
+    <h1>
+      Your health data,<br>
+      <span class="line-steel">actually useful.</span>
+    </h1>
+    <p class="hero-sub">
+      Apple Health collects everything.
+      <strong>Vitalport finally lets you use it.</strong>
+      Export steps, sleep, HRV, and workouts — broken down by type — in clean JSON or CSV, on your schedule, to wherever you need it.
+    </p>
+    <div id="notify">
+      <form class="email-form" onsubmit="handleSubmit(event, 'hero-success')">
+        <input class="email-input" type="email" placeholder="your@email.com" required aria-label="Email address">
+        <button class="email-btn" type="submit">NOTIFY ME</button>
+      </form>
+      <div id="hero-success" class="success-msg">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polyline points="2,7 6,11 12,3" stroke="#5DB88A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        You're on the list. We'll be in touch.
+      </div>
+      <p class="email-note">No spam. Launch notification only. Unsubscribe anytime.</p>
+    </div>
+  </div>
+
+  <!-- Decorative pulse SVG -->
+  <svg class="hero-pulse" width="440" height="120" viewBox="0 0 440 120" fill="none">
+    <polyline points="0,60 80,60 110,60 130,20 150,100 170,10 190,90 210,60 440,60" stroke="#4A90B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</section>
+
+<!-- DIFFERENTIATORS -->
+<section class="diff-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">Why Vitalport</p>
+      <h2>Built for people who<br>actually use their data.</h2>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-card reveal">
+        <p class="diff-number">01</p>
+        <div class="diff-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="2" y="6" width="24" height="16" rx="2" stroke="#5DB88A" stroke-width="1.5"/>
+            <line x1="8" y1="14" x2="20" y2="14" stroke="#5DB88A" stroke-width="1.5" stroke-linecap="round"/>
+            <polyline points="10,10 14,18 18,10" stroke="#4A90B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p class="diff-title">Workout type fidelity</p>
+        <p class="diff-body">Stop seeing "exercise minutes." See strength training, HIIT, walks, runs, and cycling as distinct, detailed entries — the way your data actually looks.</p>
+      </div>
+      <div class="diff-card reveal" style="transition-delay: 0.1s">
+        <p class="diff-number">02</p>
+        <div class="diff-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <circle cx="14" cy="14" r="10" stroke="#4A90B8" stroke-width="1.5"/>
+            <polyline points="8,14 11,17 16,11 20,9" stroke="#5DB88A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p class="diff-title">Reliable background sync</p>
+        <p class="diff-body">Event-driven delivery via HealthKit observer queries — not a brittle scheduler. Your data moves when it's ready, not when you remember to tap.</p>
+      </div>
+      <div class="diff-card reveal" style="transition-delay: 0.2s">
+        <p class="diff-number">03</p>
+        <div class="diff-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M14 4 L22 8 L22 16 Q22 22 14 26 Q6 22 6 16 L6 8 Z" stroke="#4A90B8" stroke-width="1.5" stroke-linejoin="round"/>
+            <polyline points="10,14 13,17 18,11" stroke="#5DB88A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p class="diff-title">Private by design</p>
+        <p class="diff-body">Your health data never touches our servers. All processing happens on-device. No accounts required. No data collected. You own it — full stop.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKOUT FIDELITY SHOWCASE -->
+<section class="fidelity-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">The difference</p>
+      <h2>Other apps tell you<br>how long you moved.<br><span style="color: var(--steel);">We tell you how.</span></h2>
+    </div>
+    <div class="fidelity-compare reveal">
+      <div class="fidelity-panel">
+        <p class="fidelity-panel-label bad">OTHER APPS — TUESDAY</p>
+        <div class="workout-row">
+          <span class="workout-name">Exercise minutes</span>
+          <span class="workout-val muted">74 min</span>
+        </div>
+        <div class="workout-row" style="opacity:0.3; font-size:0.8rem; color: var(--muted); justify-content:center; padding: 1.5rem 0;">
+          That's it. That's all you get.
+        </div>
+      </div>
+      <div class="fidelity-panel">
+        <p class="fidelity-panel-label good">VITALPORT — TUESDAY</p>
+        <div class="workout-row">
+          <span class="workout-name">Traditional Strength</span>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="workout-val green">52 min</span>
+            <span class="workout-tag tag-strength">STRENGTH</span>
+          </div>
+        </div>
+        <div class="workout-row">
+          <span class="workout-name">Outdoor Walk</span>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="workout-val green">22 min</span>
+            <span class="workout-tag tag-walk">WALK</span>
+          </div>
+        </div>
+        <div class="workout-row">
+          <span class="workout-name">Avg Heart Rate</span>
+          <span class="workout-val green">141 bpm</span>
+        </div>
+        <div class="workout-row">
+          <span class="workout-name">Active Energy</span>
+          <span class="workout-val green">618 kcal</span>
+        </div>
+        <div class="workout-row">
+          <span class="workout-name">HRV (morning)</span>
+          <span class="workout-val green">54 ms</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section class="privacy-section">
+  <div class="container">
+    <div class="privacy-statement reveal">
+      <div class="privacy-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2 L20 6 L20 12 Q20 18 12 22 Q4 18 4 12 L4 6 Z" stroke="#5DB88A" stroke-width="1.5" stroke-linejoin="round"/>
+          <polyline points="8,12 11,15 16,9" stroke="#5DB88A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <p class="privacy-headline">Your data never touches our servers.</p>
+        <p class="privacy-body">All HealthKit processing happens on your iPhone. When you export to a webhook or API endpoint, data routes directly from your device to your destination — Vitalport is never in the middle. No accounts. No tracking. No selling your health data. Ever.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <div class="container">
+    <div class="reveal">
+      <h2>Be first to know<br>when we launch.</h2>
+      <p>Join the early access list. No spam — just a launch notification.</p>
+      <form class="bottom-form" onsubmit="handleSubmit(event, 'bottom-success')">
+        <input class="email-input" type="email" placeholder="your@email.com" required aria-label="Email address">
+        <button class="email-btn" type="submit">NOTIFY ME</button>
+      </form>
+      <div id="bottom-success" class="success-msg" style="justify-content:center; margin-top:0.75rem;">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polyline points="2,7 6,11 12,3" stroke="#5DB88A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        You're on the list. We'll be in touch.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">VITALPORT.APP</span>
+  <span class="footer-tagline">Own your health data.</span>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Email form handler — replace with your actual email service endpoint
+  function handleSubmit(e, successId) {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.querySelector('input[type="email"]').value;
+
+    // TODO: Replace with your actual email capture endpoint
+    // Options: Mailchimp, ConvertKit, Buttondown, Formspark, Formspree
+    // Example: fetch('https://formspree.io/f/YOUR_ID', { method: 'POST', body: JSON.stringify({email}), headers: {'Content-Type': 'application/json'} })
+
+    // For now — show success immediately (wire up real endpoint before launch)
+    form.style.display = 'none';
+    document.getElementById(successId).classList.add('show');
+  }
+</script>
+</body>
+</html>
