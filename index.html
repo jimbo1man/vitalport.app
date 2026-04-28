@@ -574,7 +574,7 @@
       Export steps, sleep, HRV, and workouts — broken down by type — in clean JSON or CSV, on your schedule, to wherever you need it.
     </p>
     <div id="notify">
-      <form class="email-form" onsubmit="handleSubmit(event, 'hero-success')">
+      <form class="email-form" onsubmit="handleSubmit(event, 'hero-success', 'hero')">
         <input class="email-input" type="email" placeholder="your@email.com" required aria-label="Email address">
         <button class="email-btn" type="submit">NOTIFY ME</button>
       </form>
@@ -713,7 +713,7 @@
     <div class="reveal">
       <h2>Be first to know<br>when we launch.</h2>
       <p>Join the early access list. No spam — just a launch notification.</p>
-      <form class="bottom-form" onsubmit="handleSubmit(event, 'bottom-success')">
+      <form class="bottom-form" onsubmit="handleSubmit(event, 'bottom-success', 'bottom-cta')">
         <input class="email-input" type="email" placeholder="your@email.com" required aria-label="Email address">
         <button class="email-btn" type="submit">NOTIFY ME</button>
       </form>
@@ -744,19 +744,35 @@
   }, { threshold: 0.12 });
   reveals.forEach(el => observer.observe(el));
 
-  // Email form handler — replace with your actual email service endpoint
-  function handleSubmit(e, successId) {
+  const SUBSCRIBE_URL = 'https://lltdndpfzhlrionhgzrl.supabase.co/functions/v1/subscribe';
+
+  async function handleSubmit(e, successId, source) {
     e.preventDefault();
     const form = e.target;
-    const email = form.querySelector('input[type="email"]').value;
+    const btn = form.querySelector('button[type="submit"]');
+    const email = form.querySelector('input[type="email"]').value.trim();
 
-    // TODO: Replace with your actual email capture endpoint
-    // Options: Mailchimp, ConvertKit, Buttondown, Formspark, Formspree
-    // Example: fetch('https://formspree.io/f/YOUR_ID', { method: 'POST', body: JSON.stringify({email}), headers: {'Content-Type': 'application/json'} })
+    btn.disabled = true;
+    btn.textContent = 'SENDING…';
 
-    // For now — show success immediately (wire up real endpoint before launch)
-    form.style.display = 'none';
-    document.getElementById(successId).classList.add('show');
+    try {
+      const res = await fetch(SUBSCRIBE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        form.style.display = 'none';
+        document.getElementById(successId).classList.add('show');
+      } else {
+        throw new Error(data.error || 'Something went wrong.');
+      }
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'NOTIFY ME';
+      alert(err.message || 'Could not sign up. Please try again.');
+    }
   }
 </script>
 </body>
