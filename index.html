@@ -745,6 +745,7 @@
   reveals.forEach(el => observer.observe(el));
 
   const SUBSCRIBE_URL = 'https://lltdndpfzhlrionhgzrl.supabase.co/functions/v1/subscribe';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxsdGRuZHBmemhscmlvbmhnenJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNzMyMjQsImV4cCI6MjA4ODc0OTIyNH0.Dncksz3uwylWZwZwTU0BfxBnWKKX_zCVxKWq_s7vtCU';
 
   async function handleSubmit(e, successId, source) {
     e.preventDefault();
@@ -758,7 +759,10 @@
     try {
       const res = await fetch(SUBSCRIBE_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        },
         body: JSON.stringify({ email, source }),
       });
       const data = await res.json();
