@@ -51,7 +51,7 @@ Deno.serve(async (req) => {
     .single();
 
   if (dbError) {
-    // Unique constraint violation: already signed up
+    // Unique constraint violation — already signed up
     if (dbError.code === "23505") {
       return new Response(JSON.stringify({ success: true, duplicate: true }), {
         status: 200,
@@ -76,7 +76,7 @@ Deno.serve(async (req) => {
       from: `Vitalport <hello@${fromDomain}>`,
       to: email,
       subject: "You're on the list.",
-      text: "You'll be the first to know when Vitalport launches on the App Store.\n\nThanks for your interest.\n\nThe Vitalport Team",
+      text: "You'll be the first to know when Vitalport launches on the App Store.\n\nThanks for your interest.\n\n— The Vitalport Team",
     }),
     resend.emails.send({
       from: `notifications@${fromDomain}`,
