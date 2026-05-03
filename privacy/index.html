@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy</title>
+<meta name="description" content="VitalPort privacy policy. No personal data collection by default. Health data stays on your device unless you choose to export it.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Bricolage+Grotesque:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --graphite: #1A2B3C;
+    --graphite-light: #243545;
+    --steel: #4A90B8;
+    --steel-dim: #3a738f;
+    --green: #5DB88A;
+    --green-dim: #4a9a72;
+    --white: #F0F4F8;
+    --muted: #8BA4B8;
+    --surface: #111d28;
+    --surface2: #0d1820;
+    --border: rgba(74, 144, 184, 0.15);
+    --border-hover: rgba(74, 144, 184, 0.35);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--surface2);
+    color: var(--white);
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(74,144,184,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,144,184,0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(13, 24, 32, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .nav-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .nav-wordmark {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    color: var(--white);
+    letter-spacing: -0.02em;
+  }
+
+  .nav-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--green);
+    text-decoration: none;
+    border: 0.5px solid var(--green);
+    padding: 6px 16px;
+    border-radius: 2px;
+    transition: background 0.2s, color 0.2s;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-cta:hover {
+    background: var(--green);
+    color: var(--graphite);
+  }
+
+  main {
+    flex: 1;
+    padding: 7rem 0 4rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .legal-wrap {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .legal-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--green);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .legal-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 1px;
+    background: var(--green);
+  }
+
+  h1 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 2.5rem;
+  }
+
+  .legal-body {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .legal-body p + p {
+    margin-top: 1.25rem;
+  }
+
+  footer {
+    padding: 2rem;
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    opacity: 0.5;
+    letter-spacing: 0.06em;
+  }
+
+  .footer-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--steel);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    opacity: 0.9;
+  }
+
+  .footer-link:hover {
+    color: var(--green);
+  }
+
+  .footer-tagline {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    opacity: 0.4;
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 1rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <svg class="nav-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="32" height="32" rx="7" fill="#1A2B3C"/>
+      <polyline points="6,7 16,22 26,7" fill="none" stroke="#4A90B8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="2,27 7,27 9.5,22 12,29 14.5,19 17,27 30,27" fill="none" stroke="#5DB88A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="16" cy="22" r="1.5" fill="#5DB88A"/>
+    </svg>
+    <span class="nav-wordmark">Vitalport</span>
+  </a>
+  <a href="/#notify" class="nav-cta">GET EARLY ACCESS</a>
+</nav>
+
+<main>
+  <div class="container">
+    <article class="legal-wrap">
+      <p class="legal-eyebrow">VitalPort</p>
+      <h1>Privacy Policy</h1>
+      <div class="legal-body">
+        <p>VitalPort does not collect, store, or transmit personal data by default.</p>
+        <p>All health data accessed by VitalPort comes from Apple Health and remains on your device unless you explicitly choose to export it or send it to a destination you configure.</p>
+        <p>VitalPort does not include analytics, tracking, advertising, or third-party data collection.</p>
+        <p>If you choose to send data to an external endpoint, that data is transmitted only to the destination you specify.</p>
+        <p>VitalPort uses Apple-provided encryption such as HTTPS/TLS for network communication.</p>
+        <p>For questions, feedback, or privacy requests, use the App Store support link or contact the developer through the support information listed on the App Store.</p>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-left">
+    <span class="footer-logo">VITALPORT.APP</span>
+    <a href="/privacy" class="footer-link" aria-current="page">Privacy Policy</a>
+  </div>
+  <span class="footer-tagline">Own your health data.</span>
+</footer>
+
+</body>
+</html>

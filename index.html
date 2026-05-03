@@ -479,12 +479,31 @@
     z-index: 1;
   }
 
+  .footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
   .footer-logo {
     font-family: 'DM Mono', monospace;
     font-size: 12px;
     color: var(--muted);
     opacity: 0.5;
     letter-spacing: 0.06em;
+  }
+
+  .footer-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--steel);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    opacity: 0.9;
+  }
+
+  .footer-link:hover {
+    color: var(--green);
   }
 
   .footer-tagline {
@@ -542,6 +561,7 @@
     .hero-pulse { display: none; }
     nav { padding: 1rem 1.25rem; }
     .privacy-statement { flex-direction: column; gap: 1rem; }
+    footer { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
@@ -728,7 +748,10 @@
 
 <!-- FOOTER -->
 <footer>
-  <span class="footer-logo">VITALPORT.APP</span>
+  <div class="footer-left">
+    <span class="footer-logo">VITALPORT.APP</span>
+    <a href="/privacy" class="footer-link">Privacy Policy</a>
+  </div>
   <span class="footer-tagline">Own your health data.</span>
 </footer>
 
