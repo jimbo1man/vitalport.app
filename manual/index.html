@@ -4,31 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>User Manual — VitalPort</title>
-<meta name="description" content="VitalPort user manual. Export Apple Health data as JSON or CSV to destinations you control.">
+<meta name="description" content="VitalPort user manual: export Apple Health as JSON or CSV, destinations, schedules, diagnostics, and support.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Bricolage+Grotesque:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Bricolage+Grotesque:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
     --graphite: #1A2B3C;
     --graphite-light: #243545;
     --steel: #4A90B8;
-    --steel-dim: #3a738f;
     --green: #5DB88A;
-    --green-dim: #4a9a72;
     --white: #F0F4F8;
     --muted: #8BA4B8;
     --surface: #111d28;
     --surface2: #0d1820;
     --border: rgba(74, 144, 184, 0.15);
-    --border-hover: rgba(74, 144, 184, 0.35);
   }
-
   html { scroll-behavior: smooth; }
-
   body {
     background: var(--surface2);
     color: var(--white);
@@ -40,17 +34,15 @@
     display: flex;
     flex-direction: column;
   }
-
   body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 0;
     opacity: 0.4;
   }
-
   body::after {
     content: '';
     position: fixed;
@@ -62,20 +54,10 @@
     pointer-events: none;
     z-index: 0;
   }
-
-  .container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    position: relative;
-    z-index: 1;
-  }
-
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
   nav {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 0; left: 0; right: 0;
     z-index: 100;
     padding: 1.25rem 2rem;
     display: flex;
@@ -87,16 +69,8 @@
     backdrop-filter: blur(12px);
     border-bottom: 0.5px solid var(--border);
   }
-
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-  }
-
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
   .nav-icon { width: 32px; height: 32px; }
-
   .nav-wordmark {
     font-family: 'Bricolage Grotesque', sans-serif;
     font-weight: 500;
@@ -104,15 +78,7 @@
     color: var(--white);
     letter-spacing: -0.02em;
   }
-
-  .nav-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    align-items: center;
-    justify-content: flex-end;
-  }
-
+  .nav-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; justify-content: flex-end; }
   .nav-cta {
     font-family: 'DM Mono', monospace;
     font-size: 12px;
@@ -123,39 +89,20 @@
     border-radius: 2px;
     transition: background 0.2s, color 0.2s;
     letter-spacing: 0.04em;
-    text-align: center;
-    line-height: 1.3;
   }
-
-  .nav-cta:hover {
-    background: var(--green);
-    color: var(--graphite);
-  }
-
+  .nav-cta:hover { background: var(--green); color: var(--graphite); }
   .nav-cta--primary {
     background: var(--steel);
     border-color: var(--steel);
     color: var(--graphite);
   }
-
   .nav-cta--primary:hover {
     background: #5aa3ce;
     border-color: #5aa3ce;
     color: var(--graphite);
   }
-
-  main {
-    flex: 1;
-    padding: 7rem 0 4rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .manual-wrap {
-    max-width: 640px;
-    margin: 0 auto;
-  }
-
+  main { flex: 1; padding: 7rem 0 4rem; position: relative; z-index: 1; }
+  .manual-wrap { max-width: 720px; margin: 0 auto; }
   .manual-eyebrow {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
@@ -166,7 +113,6 @@
     align-items: center;
     gap: 10px;
   }
-
   .manual-eyebrow::before {
     content: '';
     display: inline-block;
@@ -174,7 +120,6 @@
     height: 1px;
     background: var(--green);
   }
-
   h1 {
     font-family: 'Bricolage Grotesque', sans-serif;
     font-weight: 600;
@@ -182,39 +127,105 @@
     letter-spacing: -0.03em;
     line-height: 1.15;
     color: var(--white);
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
   }
-
   .manual-lead {
     font-size: 1rem;
     color: var(--muted);
     line-height: 1.75;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
   }
-
+  .manual-toc {
+    margin-bottom: 2.5rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-left: 3px solid var(--green);
+  }
+  .manual-toc-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--green);
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+  }
+  .manual-toc ul {
+    list-style: none;
+    columns: 2;
+    column-gap: 2rem;
+  }
+  .manual-toc li { margin-bottom: 0.4rem; break-inside: avoid; }
+  .manual-toc a {
+    font-size: 0.85rem;
+    color: var(--steel);
+    text-decoration: none;
+  }
+  .manual-toc a:hover { color: var(--green); }
   .manual-section {
-    margin-bottom: 2.25rem;
-    padding: 1.75rem;
+    margin-bottom: 1.25rem;
+    padding: 1.5rem 1.5rem 1.35rem;
     background: var(--surface);
     border: 0.5px solid var(--border);
     border-left: 3px solid var(--steel);
   }
-
   .manual-section h2 {
     font-family: 'Bricolage Grotesque', sans-serif;
     font-weight: 600;
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     color: var(--white);
-    margin-bottom: 0.65rem;
-    letter-spacing: -0.01em;
+    margin-bottom: 0.85rem;
+    letter-spacing: -0.02em;
   }
-
+  .manual-section h3 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 600;
+    font-size: 0.98rem;
+    color: var(--white);
+    margin: 1.1rem 0 0.5rem;
+  }
+  .manual-section h3:first-child { margin-top: 0; }
   .manual-section p {
     font-size: 0.9rem;
     color: var(--muted);
     line-height: 1.65;
+    margin-bottom: 0.65rem;
   }
-
+  .manual-section p:last-child { margin-bottom: 0; }
+  .manual-section ul, .manual-section ol {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin: 0.5rem 0 0.75rem 1.1rem;
+    line-height: 1.55;
+  }
+  .manual-section li { margin-bottom: 0.35rem; }
+  .manual-steps { margin-left: 1.25rem; }
+  .manual-note {
+    font-size: 0.82rem;
+    color: var(--green);
+    opacity: 0.95;
+    border-left: 2px solid var(--green);
+    padding-left: 0.75rem;
+    margin-top: 0.75rem !important;
+  }
+  .manual-dl { margin: 0.5rem 0 0.75rem; }
+  .manual-dl dt {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    margin-top: 0.65rem;
+  }
+  .manual-dl dt:first-child { margin-top: 0; }
+  .manual-dl dd {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin: 0.2rem 0 0 0;
+    padding-left: 0;
+  }
+  .manual-dl dd a { color: var(--steel); }
+  .manual-dl dd a:hover { color: var(--green); }
+  .manual-issue { color: var(--steel) !important; }
   footer {
     padding: 2rem;
     border-top: 0.5px solid var(--border);
@@ -226,14 +237,7 @@
     position: relative;
     z-index: 1;
   }
-
-  .footer-block {
-    display: flex;
-    flex-direction: column;
-    gap: 0.65rem;
-    max-width: 420px;
-  }
-
+  .footer-block { display: flex; flex-direction: column; gap: 0.65rem; max-width: 420px; }
   .footer-logo {
     font-family: 'DM Mono', monospace;
     font-size: 12px;
@@ -241,13 +245,7 @@
     opacity: 0.5;
     letter-spacing: 0.06em;
   }
-
-  .footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.65rem 1.1rem;
-  }
-
+  .footer-links { display: flex; flex-wrap: wrap; gap: 0.65rem 1.1rem; }
   .footer-link {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
@@ -256,9 +254,7 @@
     letter-spacing: 0.04em;
     opacity: 0.9;
   }
-
   .footer-link:hover { color: var(--green); }
-
   .footer-support {
     font-family: 'DM Mono', monospace;
     font-size: 10px;
@@ -268,7 +264,6 @@
     opacity: 0.85;
     margin-top: 0.25rem;
   }
-
   .footer-tagline {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
@@ -277,10 +272,10 @@
     letter-spacing: 0.04em;
     align-self: center;
   }
-
   @media (max-width: 640px) {
     nav { padding: 1rem 1.25rem; }
     footer { flex-direction: column; align-items: flex-start; }
+    .manual-toc ul { columns: 1; }
   }
 </style>
 </head>
@@ -307,22 +302,79 @@
     <article class="manual-wrap">
       <p class="manual-eyebrow">Documentation</p>
       <h1>User Manual</h1>
-      <p class="manual-lead">This guide will grow with the app. For now, it covers what VitalPort does and where to get help. Open the app to configure exports, destinations, and schedules.</p>
-
-      <section class="manual-section" aria-labelledby="m-overview">
-        <h2 id="m-overview">Overview</h2>
-        <p>VitalPort reads Apple Health data on your device and lets you generate JSON or CSV and send it to endpoints you define. No account is required in the app.</p>
-      </section>
-
-      <section class="manual-section" aria-labelledby="m-privacy">
-        <h2 id="m-privacy">Privacy</h2>
-        <p>Health data stays on your device unless you export or send it. See the <a data-vp-href="privacy" href="/privacy/" class="footer-link" style="display:inline;">Privacy Policy</a> for details.</p>
-      </section>
-
-      <section class="manual-section" aria-labelledby="m-help">
-        <h2 id="m-help">Questions</h2>
-        <p>Use the App Store support link or the developer contact information shown on the App Store listing.</p>
-      </section>
+      <p class="manual-lead">Export, route, and own your Apple Health data.</p>
+<div class="manual-toc"><p class="manual-toc-label">On this page</p><ul>
+<li><a href="#who-this-is-for">Who This Is For</a></li>
+<li><a href="#first-export">First Export: Start Here</a></li>
+<li><a href="#what-vitalport-does">What VitalPort Does</a></li>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#setup">Setup</a></li>
+<li><a href="#dashboard">Dashboard</a></li>
+<li><a href="#exporting-data">Exporting Your Data</a></li>
+<li><a href="#send-to-endpoint">Send Data to an Endpoint</a></li>
+<li><a href="#scheduled-export">Automatic Scheduled Export</a></li>
+<li><a href="#data-pipeline-status">Check If Your Data Is Working</a></li>
+<li><a href="#fix-missing-data">Fix Missing Data</a></li>
+<li><a href="#manual-privacy">Privacy</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#support">Support</a></li>
+</ul></div>
+<section id="who-this-is-for" class="manual-section">
+<h2>Who This Is For</h2>
+<p><strong>VitalPort is designed for:</strong></p><ul><li>People who want full control and ownership of their Apple Health data</li><li>Developers routing health data into their own systems or AI pipelines</li><li>Individuals who need to share health metrics with a doctor, coach, or care provider</li><li>Anyone who has hit the wall of Apple Health&#x27;s export limitations</li></ul><p>VitalPort is not a replacement for Apple Health or a fitness tracking app. It does not analyze your data or generate recommendations on its own. It moves your data, cleanly and privately, wherever you need it to go.</p>
+</section>
+<section id="first-export" class="manual-section">
+<h2>First Export: Start Here</h2>
+<p>Before exploring any other feature, do this first. It takes under two minutes and confirms VitalPort is working correctly on your device.</p><ol class="manual-steps"><li>Open VitalPort on your iPhone.</li><li>Tap Connect Apple Health if prompted and grant permissions.</li><li>From the dashboard, tap Sync Now.</li><li>Tap Export in the navigation bar.</li><li>Leave the settings as default: JSON format, Today.</li><li>Tap Generate.</li><li>Tap Export and Share.</li><li>From the iOS share sheet, tap Save to Files.</li><li>You have now successfully exported your Apple Health data. The file in your Files app is a complete, structured JSON snapshot of today&#x27;s health metrics.</li></ol><p class="manual-note">Note: If the dashboard shows no data after syncing, go to your iPhone Settings, find Health, tap Data Access and Devices, select VitalPort, and confirm the data types you want to share are toggled on.</p>
+</section>
+<section id="what-vitalport-does" class="manual-section">
+<h2>What VitalPort Does</h2>
+<h3>What It Does</h3><ul><li>Reads your Apple Health data on your iPhone</li><li>Exports data as JSON or CSV files you can use anywhere</li><li>Sends data automatically to a URL, webhook, or API you configure</li><li>Lets you choose specific date ranges</li><li>Runs background sync to keep your data current</li></ul><h3>What It Does Not Do</h3><ul><li>No account or sign-in required</li><li>No analytics, tracking, or ads</li><li>Does not write to Apple Health</li><li>Does not share your data with anyone</li><li>Does not replace Apple Health or any fitness app</li></ul>
+</section>
+<section id="requirements" class="manual-section">
+<h2>Requirements</h2>
+<dl class="manual-dl"><dt>Device</dt><dd>iPhone only (HealthKit is not available on iPad or Mac)</dd><dt>iOS Version</dt><dd>iOS 17.0 or later</dd><dt>Health Data Source</dt><dd>Apple Watch or any app that writes to Apple Health</dd><dt>App Version</dt><dd>v0.10.52 (Public Beta)</dd></dl>
+</section>
+<section id="setup" class="manual-section">
+<h2>Setup</h2>
+<h3>Connect Apple Health</h3><p>On first launch, tap the Connect Apple Health banner on the dashboard. VitalPort will show the standard Apple Health permissions sheet. Select which data types to share.</p><p>VitalPort reads the following metrics when authorized:</p><ul><li>Steps</li><li>Sleep analysis</li><li>Heart Rate Variability (HRV)</li><li>Resting Heart Rate</li><li>Active Energy</li><li>VO2 Max</li><li>Weight</li><li>Body Fat Percentage</li><li>Workouts (with full activity type, e.g. Traditional Strength Training, Running, HIIT)</li></ul><p class="manual-note">Note: If you deny a specific type, that metric shows as unavailable in the dashboard rather than causing an error. You can change permissions anytime in iPhone Settings under Health.</p><h3>Weight Units</h3><p>VitalPort defaults to your locale&#x27;s unit (lb in the US, kg elsewhere). To change it, go to the Settings tab and select your preferred unit. This applies to the dashboard display and all exports.</p>
+</section>
+<section id="dashboard" class="manual-section">
+<h2>Dashboard</h2>
+<p>The dashboard shows today&#x27;s health summary. Metrics update automatically in the background and refresh each time you open the app.</p><h3>Metrics</h3><dl class="manual-dl manual-metrics"><dt>Steps</dt><dd>Daily step count</dd><dt>Sleep</dt><dd>Total sleep hours</dd><dt>HRV</dt><dd>Heart Rate Variability in milliseconds</dd><dt>Resting Heart Rate</dt><dd>Resting HR in BPM</dd><dt>Active Energy</dt><dd>Active calories burned</dd><dt>VO2 Max</dt><dd>Cardiorespiratory fitness estimate</dd><dt>Weight</dt><dd>Most recent weight reading</dd><dt>Body Fat</dt><dd>Most recent body fat percentage</dd><dt>Workouts</dt><dd>Sessions with activity type and duration</dd></dl><h3>Today&#x27;s Briefing Card</h3><p>The Briefing card shows a plain-language summary of up to 6 health signals you choose. To customize:</p><p>Tap the settings icon on the Briefing card.</p><p>Select up to 6 signals from the list.</p><p>Tap Done. Your selections are saved on-device.</p><h3>Sync Now</h3><p>Tap Sync Now on the dashboard to manually pull the latest data from Apple Health, refresh the local cache, and send to your active destination if one is configured.</p>
+</section>
+<section id="exporting-data" class="manual-section">
+<h2>Exporting Your Data</h2>
+<p>There are two ways to get data out of VitalPort: save a file to your device, or send it automatically to a destination you configure.</p><h3>Save a File (Export and Share)</h3><p>Use this to generate a file and open it via the iOS share sheet.</p><ol class="manual-steps"><li>From the dashboard, tap Export in the navigation bar.</li><li>Choose your Date Range: Today or Last 7 Days.</li><li>Choose your Format: JSON or CSV.</li><li>Tap Generate.</li><li>Tap Export and Share.</li><li>From the share sheet, choose where to save or send the file.</li></ol><p class="manual-note">Note: Changing the date range, format, or destination clears the current file. Always tap Generate again before sharing to ensure the file matches your selections.</p><h3>Export Formats</h3><h3>JSON</h3><p>Structured daily snapshots. Best for developers, AI ingestion, and API use. All metric keys are always present; missing data appears as null rather than being omitted.</p><h3>CSV</h3><p>Flat rows and columns. Best for spreadsheets: Excel, Google Sheets, Numbers.</p><h3>Date Ranges</h3><dl class="manual-dl manual-date-ranges"><dt>Today</dt><dd>Today&#x27;s data only</dd><dt>Last 7 Days</dt><dd>Rolling 7-day window</dd><dt>30 Days</dt><dd>Coming soon</dd><dt>90 Days</dt><dd>Coming soon</dd></dl>
+</section>
+<section id="send-to-endpoint" class="manual-section">
+<h2>Send Data to an Endpoint</h2>
+<p>Destinations let you automatically POST your health data to a URL you control. This is for developers, AI pipelines, and integrations with external systems.</p><h3>Destination Types</h3><dl class="manual-dl"><dt>JSON File</dt><dd>Saves to a local JSON file in the app sandbox</dd><dt>CSV File</dt><dd>Saves to a local CSV file in the app sandbox</dd><dt>Local Endpoint</dt><dd>POSTs to an HTTP endpoint on your local network</dd><dt>Cloud Endpoint</dt><dd>POSTs to a remote HTTPS endpoint</dd><dt>Webhook URL</dt><dd>POSTs the JSON export envelope to any configured URL</dd></dl><h3>Configure a Destination</h3><p>From the dashboard, tap Export, then tap Destinations.</p><p>Select a destination type.</p><p>Enter your endpoint URL.</p><p>Set authentication if required (Bearer Token or API Key).</p><p>Tap Save Destination.</p><p class="manual-note">Note: Credentials are stored in the iOS Keychain. Always tap Save Destination before running a test. Secrets are never auto-saved on keystroke.</p><h3>Test Your Destination</h3><p>Run Export Test: Checks connectivity only. No health data is sent.</p><p>Send Export: Sends the last generated file to your destination.</p><p>Both modes show HTTP status, latency, and a response summary. If delivery fails, tap Retry Last Failed Delivery to resend without reconfiguring.</p>
+</section>
+<section id="scheduled-export" class="manual-section">
+<h2>Automatic Scheduled Export</h2>
+<p>VitalPort can export your data on a schedule without you opening the app.</p><h3>Schedule Options</h3><dl class="manual-dl"><dt>Off</dt><dd>No automatic exports</dd><dt>Daily</dt><dd>Exports once per day at your preferred time</dd><dt>Weekly</dt><dd>Exports once per week on your chosen day and time</dd></dl><h3>Set Up a Schedule</h3><p>From the dashboard, tap the Settings tab.</p><p>Tap Scheduled Export.</p><p>Choose Daily or Weekly.</p><p>Set your preferred time and export date range.</p><p>Confirm a destination is configured and active.</p><p class="manual-note">Note: Scheduled exports use iOS Background App Refresh and run opportunistically when your device is charging or on Wi-Fi. If no sync has occurred in the last 6 hours, VitalPort also runs a catch-up sync the next time you open the app.</p>
+</section>
+<section id="data-pipeline-status" class="manual-section">
+<h2>Check If Your Data Is Working</h2>
+<p>From the Export screen, VitalPort shows the current state of your data pipeline in plain language.</p><dl class="manual-dl"><dt>Last sync time</dt><dd>When VitalPort last read from Apple Health</dd><dt>Last successful export</dt><dd>When data was last delivered to your destination</dd><dt>Last failure</dt><dd>Error reason if the last sync or export failed</dd><dt>Records exported</dt><dd>Number of daily snapshots in last run</dd><dt>HTTP status</dt><dd>Response code and latency for endpoint destinations</dd></dl>
+</section>
+<section id="fix-missing-data" class="manual-section">
+<h2>Fix Missing Data</h2>
+<p>If metrics are missing or exports are not behaving as expected, use the Diagnostics screen.</p><h3>Open Diagnostics</h3><p>From the dashboard, tap Settings, then tap Diagnostics.</p><h3>What Diagnostics Shows</h3><p>Apple Health sample coverage per metric: authorized status, number of samples in last 30 days, last sample date</p><p>Workout metadata: recent workout count, activity type, metadata keys</p><p>VO2 Max debug information</p><p>Scheduled export last-run record</p><h3>Refresh Apple Health Permissions</h3><p>After a VitalPort update, newly supported metrics may not appear automatically. From Diagnostics, tap Refresh Apple Health Permissions, approve the new types in the system sheet, then tap Sync Now from the dashboard.</p>
+</section>
+<section id="manual-privacy" class="manual-section">
+<h2>Privacy</h2>
+<p>No cloud service is included by default</p><p>Local exports are always user-initiated</p><p>Endpoint and webhook exports only occur when you configure a destination and trigger a sync</p><p>No analytics, no tracking, no third-party SDKs</p><p>Read-only access to Apple Health. VitalPort never writes to your Health database.</p><p>Credentials are stored in the iOS Keychain, on your device only</p><p class="manual-note">Note: Your health data never leaves your device unless you configure a destination or use Export and Share to send it yourself.</p>
+</section>
+<section id="troubleshooting" class="manual-section">
+<h2>Troubleshooting</h2>
+<h3 class="manual-issue">Dashboard shows no data after setup</h3><p>Go to iPhone Settings, tap Health, tap Data Access and Devices, select VitalPort, and confirm the data types you want are toggled on. Return to VitalPort and tap Sync Now.</p><h3 class="manual-issue">A specific metric is missing</h3><p>You likely denied that data type during setup. Go to iPhone Settings, Health, Data Access and Devices, VitalPort, and enable the missing type. Then tap Sync Now.</p><h3 class="manual-issue">Export test fails</h3><p>Confirm your URL is correct and reachable. Check that you saved your destination before testing. Verify your endpoint accepts POST requests with a JSON body. Review the HTTP status and error shown on the Export screen.</p><h3 class="manual-issue">VO2 Max not showing</h3><p>VO2 Max requires an Apple Watch and sufficient outdoor workout history. VitalPort looks back 90 days. If your device or tracking is recent, allow Apple Health time to generate a reading.</p><h3 class="manual-issue">Scheduled export not running</h3><p>Go to iPhone Settings and confirm Background App Refresh is enabled for VitalPort. Check Diagnostics for last-run evidence to confirm the schedule is active.</p>
+</section>
+<section id="support" class="manual-section">
+<h2>Support</h2>
+<dl class="manual-dl"><dt>Website</dt><dd><a href="https://vitalport.app/">vitalport.app</a></dd><dt>Email</dt><dd><a href="mailto:hello@vitalport.app">hello@vitalport.app</a></dd><dt>App Version</dt><dd>v0.10.52 (Public Beta)</dd></dl><p>To report a bug, include your iOS version, iPhone model, and a description of what happened. A screenshot of the Diagnostics screen is the most helpful thing you can send.</p><p>VitalPort. Your health data, your rules.</p>
+</section>
     </article>
   </div>
 </main>

@@ -1,0 +1,205 @@
+VitalPort
+User Manual
+Export, route, and own your Apple Health data.
+vitalport.app
+Who This Is For
+VitalPort is designed for:
+People who want full control and ownership of their Apple Health data
+Developers routing health data into their own systems or AI pipelines
+Individuals who need to share health metrics with a doctor, coach, or care provider
+Anyone who has hit the wall of Apple Health's export limitations
+VitalPort is not a replacement for Apple Health or a fitness tracking app. It does not analyze your data or generate recommendations on its own. It moves your data, cleanly and privately, wherever you need it to go.
+First Export: Start Here
+Before exploring any other feature, do this first. It takes under two minutes and confirms VitalPort is working correctly on your device.
+Open VitalPort on your iPhone.
+Tap Connect Apple Health if prompted and grant permissions.
+From the dashboard, tap Sync Now.
+Tap Export in the navigation bar.
+Leave the settings as default: JSON format, Today.
+Tap Generate.
+Tap Export and Share.
+From the iOS share sheet, tap Save to Files.
+You have now successfully exported your Apple Health data. The file in your Files app is a complete, structured JSON snapshot of today's health metrics.
+Note: If the dashboard shows no data after syncing, go to your iPhone Settings, find Health, tap Data Access and Devices, select VitalPort, and confirm the data types you want to share are toggled on.
+What VitalPort Does
+What It Does
+Reads your Apple Health data on your iPhone
+Exports data as JSON or CSV files you can use anywhere
+Sends data automatically to a URL, webhook, or API you configure
+Lets you choose specific date ranges
+Runs background sync to keep your data current
+What It Does Not Do
+No account or sign-in required
+No analytics, tracking, or ads
+Does not write to Apple Health
+Does not share your data with anyone
+Does not replace Apple Health or any fitness app
+Requirements
+Device
+iPhone only (HealthKit is not available on iPad or Mac)
+iOS Version
+iOS 17.0 or later
+Health Data Source
+Apple Watch or any app that writes to Apple Health
+App Version
+v0.10.52 (Public Beta)
+Setup
+Connect Apple Health
+On first launch, tap the Connect Apple Health banner on the dashboard. VitalPort will show the standard Apple Health permissions sheet. Select which data types to share.
+VitalPort reads the following metrics when authorized:
+Steps
+Sleep analysis
+Heart Rate Variability (HRV)
+Resting Heart Rate
+Active Energy
+VO2 Max
+Weight
+Body Fat Percentage
+Workouts (with full activity type, e.g. Traditional Strength Training, Running, HIIT)
+Note: If you deny a specific type, that metric shows as unavailable in the dashboard rather than causing an error. You can change permissions anytime in iPhone Settings under Health.
+Weight Units
+VitalPort defaults to your locale's unit (lb in the US, kg elsewhere). To change it, go to the Settings tab and select your preferred unit. This applies to the dashboard display and all exports.
+Dashboard
+The dashboard shows today's health summary. Metrics update automatically in the background and refresh each time you open the app.
+Metrics
+Steps
+Daily step count
+Sleep
+Total sleep hours
+HRV
+Heart Rate Variability in milliseconds
+Resting Heart Rate
+Resting HR in BPM
+Active Energy
+Active calories burned
+VO2 Max
+Cardiorespiratory fitness estimate
+Weight
+Most recent weight reading
+Body Fat
+Most recent body fat percentage
+Workouts
+Sessions with activity type and duration
+Today's Briefing Card
+The Briefing card shows a plain-language summary of up to 6 health signals you choose. To customize:
+Tap the settings icon on the Briefing card.
+Select up to 6 signals from the list.
+Tap Done. Your selections are saved on-device.
+Sync Now
+Tap Sync Now on the dashboard to manually pull the latest data from Apple Health, refresh the local cache, and send to your active destination if one is configured.
+Exporting Your Data
+There are two ways to get data out of VitalPort: save a file to your device, or send it automatically to a destination you configure.
+Save a File (Export and Share)
+Use this to generate a file and open it via the iOS share sheet.
+From the dashboard, tap Export in the navigation bar.
+Choose your Date Range: Today or Last 7 Days.
+Choose your Format: JSON or CSV.
+Tap Generate.
+Tap Export and Share.
+From the share sheet, choose where to save or send the file.
+Note: Changing the date range, format, or destination clears the current file. Always tap Generate again before sharing to ensure the file matches your selections.
+Export Formats
+JSON
+Structured daily snapshots. Best for developers, AI ingestion, and API use. All metric keys are always present; missing data appears as null rather than being omitted.
+CSV
+Flat rows and columns. Best for spreadsheets: Excel, Google Sheets, Numbers.
+Date Ranges
+Today
+Today's data only
+Last 7 Days
+Rolling 7-day window
+30 Days
+Coming soon
+90 Days
+Coming soon
+Send Data to an Endpoint
+Destinations let you automatically POST your health data to a URL you control. This is for developers, AI pipelines, and integrations with external systems.
+Destination Types
+JSON File
+Saves to a local JSON file in the app sandbox
+CSV File
+Saves to a local CSV file in the app sandbox
+Local Endpoint
+POSTs to an HTTP endpoint on your local network
+Cloud Endpoint
+POSTs to a remote HTTPS endpoint
+Webhook URL
+POSTs the JSON export envelope to any configured URL
+Configure a Destination
+From the dashboard, tap Export, then tap Destinations.
+Select a destination type.
+Enter your endpoint URL.
+Set authentication if required (Bearer Token or API Key).
+Tap Save Destination.
+Note: Credentials are stored in the iOS Keychain. Always tap Save Destination before running a test. Secrets are never auto-saved on keystroke.
+Test Your Destination
+Run Export Test: Checks connectivity only. No health data is sent.
+Send Export: Sends the last generated file to your destination.
+Both modes show HTTP status, latency, and a response summary. If delivery fails, tap Retry Last Failed Delivery to resend without reconfiguring.
+Automatic Scheduled Export
+VitalPort can export your data on a schedule without you opening the app.
+Schedule Options
+Off
+No automatic exports
+Daily
+Exports once per day at your preferred time
+Weekly
+Exports once per week on your chosen day and time
+Set Up a Schedule
+From the dashboard, tap the Settings tab.
+Tap Scheduled Export.
+Choose Daily or Weekly.
+Set your preferred time and export date range.
+Confirm a destination is configured and active.
+Note: Scheduled exports use iOS Background App Refresh and run opportunistically when your device is charging or on Wi-Fi. If no sync has occurred in the last 6 hours, VitalPort also runs a catch-up sync the next time you open the app.
+Check If Your Data Is Working
+From the Export screen, VitalPort shows the current state of your data pipeline in plain language.
+Last sync time
+When VitalPort last read from Apple Health
+Last successful export
+When data was last delivered to your destination
+Last failure
+Error reason if the last sync or export failed
+Records exported
+Number of daily snapshots in last run
+HTTP status
+Response code and latency for endpoint destinations
+Fix Missing Data
+If metrics are missing or exports are not behaving as expected, use the Diagnostics screen.
+Open Diagnostics
+From the dashboard, tap Settings, then tap Diagnostics.
+What Diagnostics Shows
+Apple Health sample coverage per metric: authorized status, number of samples in last 30 days, last sample date
+Workout metadata: recent workout count, activity type, metadata keys
+VO2 Max debug information
+Scheduled export last-run record
+Refresh Apple Health Permissions
+After a VitalPort update, newly supported metrics may not appear automatically. From Diagnostics, tap Refresh Apple Health Permissions, approve the new types in the system sheet, then tap Sync Now from the dashboard.
+Privacy
+No cloud service is included by default
+Local exports are always user-initiated
+Endpoint and webhook exports only occur when you configure a destination and trigger a sync
+No analytics, no tracking, no third-party SDKs
+Read-only access to Apple Health. VitalPort never writes to your Health database.
+Credentials are stored in the iOS Keychain, on your device only
+Note: Your health data never leaves your device unless you configure a destination or use Export and Share to send it yourself.
+Troubleshooting
+Dashboard shows no data after setup
+Go to iPhone Settings, tap Health, tap Data Access and Devices, select VitalPort, and confirm the data types you want are toggled on. Return to VitalPort and tap Sync Now.
+A specific metric is missing
+You likely denied that data type during setup. Go to iPhone Settings, Health, Data Access and Devices, VitalPort, and enable the missing type. Then tap Sync Now.
+Export test fails
+Confirm your URL is correct and reachable. Check that you saved your destination before testing. Verify your endpoint accepts POST requests with a JSON body. Review the HTTP status and error shown on the Export screen.
+VO2 Max not showing
+VO2 Max requires an Apple Watch and sufficient outdoor workout history. VitalPort looks back 90 days. If your device or tracking is recent, allow Apple Health time to generate a reading.
+Scheduled export not running
+Go to iPhone Settings and confirm Background App Refresh is enabled for VitalPort. Check Diagnostics for last-run evidence to confirm the schedule is active.
+Support
+Website
+vitalport.app
+Email
+hello@vitalport.app
+App Version
+v0.10.52 (Public Beta)
+To report a bug, include your iOS version, iPhone model, and a description of what happened. A screenshot of the Diagnostics screen is the most helpful thing you can send.
+VitalPort. Your health data, your rules.
