@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Privacy Policy</title>
-<meta name="description" content="VitalPort privacy policy. No personal data collection by default. Health data stays on your device unless you choose to export it.">
+<title>User Manual — VitalPort</title>
+<meta name="description" content="VitalPort user manual. Export Apple Health data as JSON or CSV to destinations you control.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -95,10 +95,7 @@
     text-decoration: none;
   }
 
-  .nav-icon {
-    width: 32px;
-    height: 32px;
-  }
+  .nav-icon { width: 32px; height: 32px; }
 
   .nav-wordmark {
     font-family: 'Bricolage Grotesque', sans-serif;
@@ -108,29 +105,31 @@
     letter-spacing: -0.02em;
   }
 
-  .nav-cta {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    color: var(--green);
-    text-decoration: none;
-    border: 0.5px solid var(--green);
-    padding: 6px 16px;
-    border-radius: 2px;
-    transition: background 0.2s, color 0.2s;
-    letter-spacing: 0.05em;
-  }
-
-  .nav-cta:hover {
-    background: var(--green);
-    color: var(--graphite);
-  }
-
   .nav-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
     align-items: center;
     justify-content: flex-end;
+  }
+
+  .nav-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--green);
+    text-decoration: none;
+    border: 0.5px solid var(--green);
+    padding: 6px 14px;
+    border-radius: 2px;
+    transition: background 0.2s, color 0.2s;
+    letter-spacing: 0.04em;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .nav-cta:hover {
+    background: var(--green);
+    color: var(--graphite);
   }
 
   .nav-cta--primary {
@@ -152,12 +151,12 @@
     z-index: 1;
   }
 
-  .legal-wrap {
+  .manual-wrap {
     max-width: 640px;
     margin: 0 auto;
   }
 
-  .legal-eyebrow {
+  .manual-eyebrow {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
     letter-spacing: 0.12em;
@@ -168,7 +167,7 @@
     gap: 10px;
   }
 
-  .legal-eyebrow::before {
+  .manual-eyebrow::before {
     content: '';
     display: inline-block;
     width: 16px;
@@ -183,17 +182,37 @@
     letter-spacing: -0.03em;
     line-height: 1.15;
     color: var(--white);
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
   }
 
-  .legal-body {
+  .manual-lead {
     font-size: 1rem;
     color: var(--muted);
     line-height: 1.75;
+    margin-bottom: 2.5rem;
   }
 
-  .legal-body p + p {
-    margin-top: 1.25rem;
+  .manual-section {
+    margin-bottom: 2.25rem;
+    padding: 1.75rem;
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-left: 3px solid var(--steel);
+  }
+
+  .manual-section h2 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--white);
+    margin-bottom: 0.65rem;
+    letter-spacing: -0.01em;
+  }
+
+  .manual-section p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.65;
   }
 
   footer {
@@ -215,18 +234,18 @@
     max-width: 420px;
   }
 
-  .footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.65rem 1.1rem;
-  }
-
   .footer-logo {
     font-family: 'DM Mono', monospace;
     font-size: 12px;
     color: var(--muted);
     opacity: 0.5;
     letter-spacing: 0.06em;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1.1rem;
   }
 
   .footer-link {
@@ -238,9 +257,7 @@
     opacity: 0.9;
   }
 
-  .footer-link:hover {
-    color: var(--green);
-  }
+  .footer-link:hover { color: var(--green); }
 
   .footer-support {
     font-family: 'DM Mono', monospace;
@@ -249,7 +266,7 @@
     letter-spacing: 0.03em;
     line-height: 1.55;
     opacity: 0.85;
-    margin-top: 0.15rem;
+    margin-top: 0.25rem;
   }
 
   .footer-tagline {
@@ -281,23 +298,31 @@
   </a>
   <div class="nav-actions">
     <a data-vp-href="appStore" href="https://apps.apple.com/app/id6764275336" class="nav-cta nav-cta--primary">Download on the App Store</a>
-    <a data-vp-href="manual" href="/manual/" class="nav-cta">Read the User Manual</a>
+    <a href="/" class="nav-cta">Home</a>
   </div>
 </nav>
 
 <main>
   <div class="container">
-    <article class="legal-wrap">
-      <p class="legal-eyebrow">VitalPort</p>
-      <h1>Privacy Policy</h1>
-      <div class="legal-body">
-        <p>VitalPort does not collect, store, or transmit personal data by default.</p>
-        <p>All health data accessed by VitalPort comes from Apple Health and remains on your device unless you explicitly choose to export it or send it to a destination you configure.</p>
-        <p>VitalPort does not include analytics, tracking, advertising, or third-party data collection.</p>
-        <p>If you choose to send data to an external endpoint, that data is transmitted only to the destination you specify.</p>
-        <p>VitalPort uses Apple-provided encryption such as HTTPS/TLS for network communication.</p>
-        <p>For questions, feedback, or privacy requests, use the App Store support link or contact the developer through the support information listed on the App Store.</p>
-      </div>
+    <article class="manual-wrap">
+      <p class="manual-eyebrow">Documentation</p>
+      <h1>User Manual</h1>
+      <p class="manual-lead">This guide will grow with the app. For now, it covers what VitalPort does and where to get help. Open the app to configure exports, destinations, and schedules.</p>
+
+      <section class="manual-section" aria-labelledby="m-overview">
+        <h2 id="m-overview">Overview</h2>
+        <p>VitalPort reads Apple Health data on your device and lets you generate JSON or CSV and send it to endpoints you define. No account is required in the app.</p>
+      </section>
+
+      <section class="manual-section" aria-labelledby="m-privacy">
+        <h2 id="m-privacy">Privacy</h2>
+        <p>Health data stays on your device unless you export or send it. See the <a data-vp-href="privacy" href="/privacy/" class="footer-link" style="display:inline;">Privacy Policy</a> for details.</p>
+      </section>
+
+      <section class="manual-section" aria-labelledby="m-help">
+        <h2 id="m-help">Questions</h2>
+        <p>Use the App Store support link or the developer contact information shown on the App Store listing.</p>
+      </section>
     </article>
   </div>
 </main>
@@ -307,8 +332,8 @@
     <span class="footer-logo">VITALPORT.APP</span>
     <nav class="footer-links" aria-label="Footer">
       <a data-vp-href="appStore" href="https://apps.apple.com/app/id6764275336" class="footer-link">App Store</a>
-      <a data-vp-href="manual" href="/manual/" class="footer-link">User Manual</a>
-      <a data-vp-href="privacy" href="/privacy/" class="footer-link" aria-current="page">Privacy Policy</a>
+      <a href="/manual/" class="footer-link" aria-current="page">User Manual</a>
+      <a data-vp-href="privacy" href="/privacy/" class="footer-link">Privacy Policy</a>
     </nav>
     <p class="footer-support">Questions or feedback? Use the App Store support link.</p>
   </div>
