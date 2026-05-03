@@ -309,13 +309,16 @@ def fmt_default(slug: str, body: list[str]) -> str:
 
         if slug == "support" and line == "Website":
             pairs = []
-            while i + 1 < len(body) and body[i].strip() in ("Website", "Email", "App Version"):
+            while i + 1 < len(body) and body[i].strip() in ("Website", "App Store", "App Version"):
                 t, d = body[i].strip(), body[i + 1].strip()
                 if t == "Website":
                     d_html = '<a href="https://' + esc(d) + '/">' + esc(d) + "</a>"
                     pairs.append((t, d_html))
-                elif t == "Email":
-                    d_html = '<a href="mailto:' + esc(d) + '">' + esc(d) + "</a>"
+                elif t == "App Store":
+                    d_html = (
+                        'Use the <a href="https://apps.apple.com/app/id6764275336">App Store support link</a> '
+                        "on the VitalPort listing for questions, feedback, or bug reports."
+                    )
                     pairs.append((t, d_html))
                 else:
                     pairs.append((t, esc(d)))

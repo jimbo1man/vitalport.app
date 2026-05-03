@@ -197,8 +197,8 @@ Go to iPhone Settings and confirm Background App Refresh is enabled for VitalPor
 Support
 Website
 vitalport.app
-Email
-hello@vitalport.app
+App Store
+Use the App Store support link on the VitalPort listing for questions, feedback, or bug reports.
 App Version
 v0.10.52 (Public Beta)
 To report a bug, include your iOS version, iPhone model, and a description of what happened. A screenshot of the Diagnostics screen is the most helpful thing you can send.

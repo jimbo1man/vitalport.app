@@ -39,7 +39,7 @@ Set these via the Supabase dashboard (Project → Edge Functions → Secrets) or
 ```bash
 supabase secrets set RESEND_API_KEY=re_...
 supabase secrets set FROM_DOMAIN=vitalport.app
-supabase secrets set ADMIN_EMAIL=hello@vitalport.app
+supabase secrets set ADMIN_EMAIL=your-admin@example.com
 ```
 
 `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are injected automatically.
