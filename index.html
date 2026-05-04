@@ -598,11 +598,19 @@
 
   .showcase-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 1px;
     background: var(--border);
     border: 0.5px solid var(--border);
     margin-top: 3rem;
+  }
+
+  @media (max-width: 1000px) {
+    .showcase-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 720px) {
+    .showcase-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   .showcase-card {
@@ -1060,16 +1068,24 @@
     </div>
     <div class="showcase-grid reveal">
       <figure class="showcase-card">
-        <img src="/assets/screenshots/dashboard.png" alt="VitalPort dashboard with Apple Health sync, today’s briefing, and metric tiles" width="1170" height="2532" loading="lazy" decoding="async">
-        <figcaption>Sync Apple Health, refresh on your terms, and scan today’s metrics at a glance.</figcaption>
+        <img src="/assets/screenshots/img-4714.png" alt="VitalPort home screen with Export, Settings, Apple Health refresh, and today’s briefing preview" width="470" height="1024" loading="lazy" decoding="async">
+        <figcaption>Export and Settings up top, Apple Health refresh, and a snapshot of today’s briefing—all without signing in.</figcaption>
       </figure>
       <figure class="showcase-card">
-        <img src="/assets/screenshots/export.png" alt="VitalPort Export screen with destinations, manual sync, and latest result" width="1170" height="2532" loading="lazy" decoding="async">
-        <figcaption>Manage destinations, run a manual sync, or export and share JSON or CSV from the share sheet.</figcaption>
+        <img src="/assets/screenshots/img-4715.png" alt="VitalPort today’s briefing grid showing steps, sleep, HRV, resting heart rate, training, and weight" width="470" height="1024" loading="lazy" decoding="async">
+        <figcaption>Today’s briefing expands into a grid of your selected metrics: steps, sleep, HRV, resting heart rate, training, and weight.</figcaption>
       </figure>
       <figure class="showcase-card">
-        <img src="/assets/screenshots/destinations.png" alt="VitalPort Destinations list including JSON file, CSV, local endpoint, cloud, and webhook" width="1170" height="2532" loading="lazy" decoding="async">
+        <img src="/assets/screenshots/img-4716.png" alt="VitalPort Destinations list for JSON file, CSV file, local endpoint, cloud endpoint, webhook, and Google Sheets" width="470" height="1024" loading="lazy" decoding="async">
         <figcaption>Route data to local files, your network, HTTPS endpoints, or webhooks—only when you configure it.</figcaption>
+      </figure>
+      <figure class="showcase-card">
+        <img src="/assets/screenshots/img-4717.png" alt="VitalPort HRV screen with weekly trend chart and recent daily values" width="470" height="1024" loading="lazy" decoding="async">
+        <figcaption>Drill into a metric for the latest reading, range tabs, a trend chart, and recent days—shown here with HRV.</figcaption>
+      </figure>
+      <figure class="showcase-card">
+        <img src="/assets/screenshots/img-4718.png" alt="VitalPort Export and Share sheet with JSON and CSV format and date range options" width="470" height="1024" loading="lazy" decoding="async">
+        <figcaption>Choose JSON or CSV, pick a date range, and read how the export profile maps coaching snapshot fields before you share.</figcaption>
       </figure>
     </div>
   </div>
