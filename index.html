@@ -237,6 +237,19 @@
     max-width: 220px;
     min-width: 140px;
     text-align: center;
+    cursor: pointer;
+    outline-offset: 4px;
+    transition: transform 0.15s ease;
+  }
+
+  .hero-device-preview .hero-shot:focus-visible {
+    outline: 2px solid var(--steel);
+  }
+
+  @media (hover: hover) {
+    .hero-device-preview .hero-shot:hover {
+      transform: translateY(-2px);
+    }
   }
 
   .hero-device-preview .hero-shot img {
@@ -258,6 +271,109 @@
   .hero .hero-showcase-heading {
     margin-top: 0.25rem;
     margin-bottom: 1.25rem;
+  }
+
+  /* ── Hero screenshot lightbox ── */
+  .hero-lb {
+    position: fixed;
+    inset: 0;
+    z-index: 400;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: max(0.75rem, env(safe-area-inset-top)) max(0.75rem, env(safe-area-inset-right)) max(0.75rem, env(safe-area-inset-bottom)) max(0.75rem, env(safe-area-inset-left));
+    box-sizing: border-box;
+    overscroll-behavior: contain;
+  }
+
+  .hero-lb.is-open {
+    display: flex;
+  }
+
+  .hero-lb__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 10, 14, 0.88);
+    border: 0;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .hero-lb__panel {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-width: min(560px, 100%);
+    max-height: 100%;
+    pointer-events: none;
+  }
+
+  .hero-lb__panel > * {
+    pointer-events: auto;
+  }
+
+  .hero-lb__close {
+    position: fixed;
+    top: max(0.75rem, env(safe-area-inset-top));
+    right: max(0.75rem, env(safe-area-inset-right));
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--green);
+    background: var(--surface2);
+    border: 0.5px solid var(--green);
+    border-radius: 2px;
+    padding: 10px 16px;
+    cursor: pointer;
+    min-height: 44px;
+    min-width: 44px;
+    z-index: 2;
+  }
+
+  .hero-lb__close:hover,
+  .hero-lb__close:focus-visible {
+    background: var(--green);
+    color: var(--graphite);
+    outline: none;
+  }
+
+  .hero-lb__imgwrap {
+    max-height: min(78vh, 900px);
+    max-width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 0.5px solid var(--border);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+    background: #000;
+  }
+
+  .hero-lb__img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: min(520px, 92vw);
+    max-height: min(78vh, 900px);
+    object-fit: contain;
+  }
+
+  .hero-lb__caption {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(0.95rem, 2.8vw, 1.1rem);
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--white);
+    text-align: center;
+    margin: 0;
+    padding: 0 0.5rem 0.25rem;
+    max-width: 36rem;
+  }
+
+  body.hero-lb-open {
+    overflow: hidden;
   }
 
   /* ── HERO CTAs ── */
@@ -851,6 +967,17 @@
   <span class="footer-tagline">Own your health data.</span>
 </footer>
 
+<div id="hero-screenshot-lightbox" class="hero-lb" aria-hidden="true">
+  <button type="button" class="hero-lb__backdrop" data-hero-lb-close tabindex="-1" aria-label="Close preview"></button>
+  <div class="hero-lb__panel" role="dialog" aria-modal="true" aria-labelledby="hero-lb-caption">
+    <button type="button" class="hero-lb__close" data-hero-lb-close>Close</button>
+    <div class="hero-lb__imgwrap">
+      <img class="hero-lb__img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+    </div>
+    <p id="hero-lb-caption" class="hero-lb__caption"></p>
+  </div>
+</div>
+
 <script src="/site-config.js"></script>
 <script>
   (function () {
@@ -873,6 +1000,73 @@
     });
   }, { threshold: 0.12 });
   reveals.forEach(el => observer.observe(el));
+
+  (function () {
+    var lb = document.getElementById('hero-screenshot-lightbox');
+    if (!lb) return;
+    var lbImg = lb.querySelector('.hero-lb__img');
+    var lbCap = document.getElementById('hero-lb-caption');
+    var closeEls = lb.querySelectorAll('[data-hero-lb-close]');
+    var lastFocus = null;
+
+    function openLb(figure) {
+      var img = figure.querySelector('img');
+      var cap = figure.querySelector('figcaption');
+      if (!img || !lbImg || !lbCap) return;
+      lastFocus = document.activeElement;
+      lbImg.src = img.currentSrc || img.getAttribute('src') || '';
+      lbImg.alt = img.getAttribute('alt') || '';
+      lbCap.textContent = cap ? cap.textContent : '';
+      lb.classList.add('is-open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('hero-lb-open');
+      var closeBtn = lb.querySelector('.hero-lb__close');
+      if (closeBtn) closeBtn.focus();
+    }
+
+    function closeLb() {
+      if (!lb.classList.contains('is-open')) return;
+      lb.classList.remove('is-open');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('hero-lb-open');
+      lbImg.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+      lbImg.alt = '';
+      lbCap.textContent = '';
+      if (lastFocus && typeof lastFocus.focus === 'function') {
+        lastFocus.focus();
+      }
+      lastFocus = null;
+    }
+
+    document.querySelectorAll('.hero-device-preview .hero-shot').forEach(function (fig) {
+      fig.setAttribute('role', 'button');
+      fig.setAttribute('tabindex', '0');
+      fig.setAttribute('aria-haspopup', 'dialog');
+      fig.setAttribute('aria-label', 'View screenshot larger');
+      fig.addEventListener('click', function () {
+        openLb(fig);
+      });
+      fig.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openLb(fig);
+        }
+      });
+    });
+
+    closeEls.forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        e.preventDefault();
+        closeLb();
+      });
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && lb.classList.contains('is-open')) {
+        closeLb();
+      }
+    });
+  })();
 </script>
 </body>
 </html>
