@@ -213,7 +213,7 @@
     margin-top: 1rem;
   }
 
-  /* ── HERO DEVICE PREVIEW (from vitalport_screenshot_1_dashboard) ── */
+  /* ── HERO SCREENSHOTS (same assets as “Inside the app”) ── */
   .hero-device-preview {
     margin: 0 0 2.25rem;
     max-width: 100%;
@@ -225,150 +225,39 @@
 
   .hero-device-preview .frame-row {
     display: flex;
-    gap: 20px;
+    gap: 14px;
     justify-content: center;
     flex-wrap: wrap;
+    align-items: flex-start;
   }
 
-  .hero-device-preview .screenshot-frame {
-    width: 280px;
-    background: #0D1B26;
-    border-radius: 28px;
-    padding: 28px 20px 32px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid #1E3448;
-  }
-
-  .hero-device-preview .hdp-headline {
-    font-size: 15px;
-    font-weight: 500;
-    color: #5DB88A;
+  .hero-device-preview .hero-shot {
+    margin: 0;
+    flex: 0 1 188px;
+    max-width: 220px;
+    min-width: 140px;
     text-align: center;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    margin-bottom: 8px;
   }
 
-  .hero-device-preview .hdp-subhead {
-    font-size: 22px;
-    font-weight: 500;
-    color: #F0F4F8;
-    text-align: center;
-    line-height: 1.3;
-    margin-bottom: 20px;
+  .hero-device-preview .hero-shot img {
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    border: 0.5px solid var(--border);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    display: block;
   }
 
-  .hero-device-preview .hdp-phone {
-    width: 220px;
-    background: #111;
-    border-radius: 36px;
-    border: 2px solid #2A3A4A;
-    overflow: hidden;
-    position: relative;
+  .hero-device-preview .hero-shot figcaption {
+    margin-top: 0.65rem;
+    font-size: 0.72rem;
+    color: var(--muted);
+    line-height: 1.45;
   }
 
-  .hero-device-preview .hdp-phone-notch {
-    width: 80px;
-    height: 22px;
-    background: #111;
-    border-radius: 0 0 14px 14px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
-  }
-
-  .hero-device-preview .hdp-phone-screen {
-    background: #000;
-    padding: 0;
-  }
-
-  .hero-device-preview .hdp-screen-content {
-    background: #111418;
-    padding: 10px 12px 16px;
-  }
-
-  .hero-device-preview .hdp-status-bar {
-    display: flex;
-    justify-content: space-between;
-    font-size: 9px;
-    color: #999;
-    margin-bottom: 10px;
-    padding: 4px 0;
-  }
-
-  .hero-device-preview .hdp-app-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-  }
-
-  .hero-device-preview .hdp-btn-pill {
-    background: #1C2B3A;
-    border-radius: 20px;
-    padding: 4px 10px;
-    font-size: 9px;
-    color: #4ECDC4;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .hero-device-preview .hdp-app-title { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-  .hero-device-preview .hdp-app-tagline { font-size: 10px; color: #aaa; margin-bottom: 12px; }
-
-  .hero-device-preview .hdp-card {
-    background: #1C2430;
-    border-radius: 12px;
-    padding: 10px 12px;
-    margin-bottom: 8px;
-  }
-
-  .hero-device-preview .hdp-card-label { font-size: 8px; color: #888; margin-bottom: 4px; }
-  .hero-device-preview .hdp-card-title { font-size: 11px; font-weight: 600; color: #fff; margin-bottom: 2px; }
-  .hero-device-preview .hdp-card-sub { font-size: 8px; color: #666; }
-
-  .hero-device-preview .hdp-sync-btn {
-    background: #4ECDC4;
-    border-radius: 20px;
-    padding: 7px 0;
-    text-align: center;
-    font-size: 9px;
-    font-weight: 600;
-    color: #0D1B26;
-    margin-bottom: 8px;
-  }
-
-  .hero-device-preview .hdp-metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-
-  .hero-device-preview .hdp-metric-card {
-    background: #1C2430;
-    border-radius: 10px;
-    padding: 8px;
-  }
-
-  .hero-device-preview .hdp-metric-label { font-size: 7px; color: #888; }
-  .hero-device-preview .hdp-metric-val { font-size: 13px; font-weight: 700; color: #fff; }
-  .hero-device-preview .hdp-metric-unit { font-size: 7px; color: #4ECDC4; }
-
-  .hero-device-preview .hdp-tag {
-    display: inline-block;
-    background: #0D2A22;
-    color: #5DB88A;
-    border-radius: 8px;
-    padding: 2px 6px;
-    font-size: 7px;
-    margin-top: 2px;
-  }
-
-  .hero-device-preview .hdp-caption {
-    font-size: 12px;
-    color: #6B8BAA;
-    text-align: center;
-    margin-top: 16px;
-    line-height: 1.5;
+  .hero .hero-showcase-heading {
+    margin-top: 0.25rem;
+    margin-bottom: 1.25rem;
   }
 
   /* ── HERO CTAs ── */
@@ -590,55 +479,6 @@
   .tag-hiit { background: rgba(74,144,184,0.12); color: var(--steel); }
   .tag-walk { background: rgba(139,164,184,0.12); color: var(--muted); }
 
-  /* ── APP SCREENSHOTS ── */
-  .app-showcase-section {
-    padding: 6rem 0;
-    border-top: 0.5px solid var(--border);
-  }
-
-  .showcase-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 0.5px solid var(--border);
-    margin-top: 3rem;
-  }
-
-  @media (max-width: 1000px) {
-    .showcase-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-
-  @media (max-width: 720px) {
-    .showcase-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  .showcase-card {
-    background: var(--surface);
-    margin: 0;
-    padding: 1.25rem 1rem 1.5rem;
-    text-align: center;
-  }
-
-  .showcase-card img {
-    width: 100%;
-    max-width: 260px;
-    height: auto;
-    border-radius: 14px;
-    border: 0.5px solid var(--border);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
-  }
-
-  .showcase-card figcaption {
-    margin-top: 1rem;
-    font-size: 0.8rem;
-    color: var(--muted);
-    line-height: 1.5;
-    max-width: 280px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   /* ── PRIVACY ── */
   .privacy-section {
     padding: 5rem 0;
@@ -786,7 +626,6 @@
     .cta-row { flex-direction: column; }
     .cta-primary, .cta-secondary { width: 100%; }
     .fidelity-compare { grid-template-columns: 1fr; }
-    .showcase-grid { grid-template-columns: 1fr; }
     .hero-pulse { display: none; }
     nav { padding: 1rem 1.25rem; }
     .privacy-statement { flex-direction: column; gap: 1rem; }
@@ -827,126 +666,33 @@
       <p><strong>No account required. No analytics. No tracking.</strong> Workout types, sleep, HRV, and more—broken down the way your data actually looks.</p>
     </div>
 
-    <div class="hero-device-preview" aria-hidden="true">
+    <div class="section-header reveal hero-showcase-heading">
+      <p class="section-label">Inside the app</p>
+      <h2>Dashboard, export,<br><span style="color: var(--steel);">and destinations.</span></h2>
+    </div>
+
+    <div class="hero-device-preview">
       <div class="frame-row">
-        <div class="screenshot-frame">
-          <div class="hdp-headline">Your data, unlocked</div>
-          <div class="hdp-subhead">Everything Apple Health collects. Finally yours to use.</div>
-          <div class="hdp-phone">
-            <div class="hdp-phone-notch"></div>
-            <div class="hdp-phone-screen">
-              <div class="hdp-screen-content">
-                <div class="hdp-status-bar"><span>9:41</span><span>●●●● WiFi</span></div>
-                <div class="hdp-app-header">
-                  <div class="hdp-btn-pill">&#8679; Export</div>
-                  <div class="hdp-btn-pill">&#9107; Settings</div>
-                </div>
-                <div class="hdp-app-title">VitalPort</div>
-                <div class="hdp-app-tagline">Apple Health sync and export, on your terms.</div>
-                <div class="hdp-sync-btn">&#8635; Apple Health Refresh</div>
-                <div class="hdp-card">
-                  <div class="hdp-card-label">Today's briefing</div>
-                  <div class="hdp-card-title">Sunday, May 3</div>
-                  <div class="hdp-card-sub">5 of 6 signals available</div>
-                </div>
-                <div class="hdp-metrics-grid">
-                  <div class="hdp-metric-card">
-                    <div class="hdp-metric-label">Steps</div>
-                    <div class="hdp-metric-val">11,897</div>
-                    <div class="hdp-tag">above goal</div>
-                  </div>
-                  <div class="hdp-metric-card">
-                    <div class="hdp-metric-label">Sleep</div>
-                    <div class="hdp-metric-val">7.8<span class="hdp-metric-unit">h</span></div>
-                    <div class="hdp-tag">on track</div>
-                  </div>
-                  <div class="hdp-metric-card">
-                    <div class="hdp-metric-label">HRV</div>
-                    <div class="hdp-metric-val">54<span class="hdp-metric-unit">ms</span></div>
-                  </div>
-                  <div class="hdp-metric-card">
-                    <div class="hdp-metric-label">Resting HR</div>
-                    <div class="hdp-metric-val">58<span class="hdp-metric-unit">bpm</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="hdp-caption">Dashboard with real-time Apple Health metrics and daily briefing</div>
-        </div>
-
-        <div class="screenshot-frame">
-          <div class="hdp-headline">Export in seconds</div>
-          <div class="hdp-subhead">JSON or CSV. Your choice. Your destination.</div>
-          <div class="hdp-phone">
-            <div class="hdp-phone-notch"></div>
-            <div class="hdp-phone-screen">
-              <div class="hdp-screen-content">
-                <div class="hdp-status-bar"><span>9:41</span><span>●●●● WiFi</span></div>
-                <div style="font-size:13px;font-weight:600;color:#fff;text-align:center;margin-bottom:12px;">Export</div>
-                <div class="hdp-card" style="margin-bottom:8px;">
-                  <div class="hdp-card-label">Manage destinations</div>
-                  <div class="hdp-card-title">Active: Local Endpoint</div>
-                  <div style="color:#4ECDC4;font-size:8px;margin-top:4px;">&#10148; Manage Destinations</div>
-                </div>
-                <div class="hdp-card-label" style="color:#666;font-size:8px;margin-bottom:4px;">Manual actions</div>
-                <div class="hdp-card" style="margin-bottom:6px;">
-                  <div style="color:#4ECDC4;font-size:11px;font-weight:600;margin-bottom:6px;">&#8635; Sync Now</div>
-                  <div style="height:1px;background:#2A3A4A;margin-bottom:6px;"></div>
-                  <div style="color:#4ECDC4;font-size:11px;font-weight:600;">&#8679; Export and Share</div>
-                </div>
-                <div style="font-size:7px;color:#666;margin-bottom:10px;line-height:1.5;">Export generates a file and opens the iOS share sheet (JSON or CSV). Sync reads Apple Health and delivers to your active destination.</div>
-                <div class="hdp-card-label" style="color:#666;font-size:8px;margin-bottom:4px;">Latest result</div>
-                <div class="hdp-card">
-                  <div class="hdp-card-title">Today at 12:32 PM</div>
-                  <div style="color:#5DB88A;font-size:8px;margin-top:2px;">Success  200 OK  124ms</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="hdp-caption">One tap to sync or export. Full delivery status and history.</div>
-        </div>
-
-        <div class="screenshot-frame">
-          <div class="hdp-headline">Route it anywhere</div>
-          <div class="hdp-subhead">Five destinations. Local, cloud, webhook, or file.</div>
-          <div class="hdp-phone">
-            <div class="hdp-phone-notch"></div>
-            <div class="hdp-phone-screen">
-              <div class="hdp-screen-content">
-                <div class="hdp-status-bar"><span>9:41</span><span>●●●● WiFi</span></div>
-                <div style="font-size:13px;font-weight:600;color:#fff;text-align:center;margin-bottom:12px;">Destinations</div>
-                <div class="hdp-card" style="padding:0;overflow:hidden;">
-                  <div style="padding:8px 10px;border-bottom:1px solid #2A3A4A;display:flex;align-items:center;gap:8px;">
-                    <span style="font-size:11px;">&#128441;</span>
-                    <div><div style="font-size:9px;font-weight:600;color:#fff;">JSON File</div><div style="font-size:7px;color:#666;">Local file</div></div>
-                  </div>
-                  <div style="padding:8px 10px;border-bottom:1px solid #2A3A4A;display:flex;align-items:center;gap:8px;">
-                    <span style="font-size:11px;">&#128202;</span>
-                    <div><div style="font-size:9px;font-weight:600;color:#fff;">CSV File</div><div style="font-size:7px;color:#666;">Local file</div></div>
-                  </div>
-                  <div style="padding:8px 10px;border-bottom:1px solid #2A3A4A;display:flex;align-items:center;gap:8px;">
-                    <span style="font-size:11px;">&#128225;</span>
-                    <div style="flex:1"><div style="font-size:9px;font-weight:600;color:#fff;">Local Endpoint <span style="background:#0D2A22;color:#5DB88A;border-radius:6px;padding:1px 5px;font-size:7px;">Active</span></div><div style="font-size:7px;color:#666;">HTTP on your network</div></div>
-                  </div>
-                  <div style="padding:8px 10px;border-bottom:1px solid #2A3A4A;display:flex;align-items:center;gap:8px;">
-                    <span style="font-size:11px;">&#9729;</span>
-                    <div><div style="font-size:9px;font-weight:600;color:#fff;">Cloud Endpoint</div><div style="font-size:7px;color:#666;">HTTPS endpoint</div></div>
-                  </div>
-                  <div style="padding:8px 10px;border-bottom:1px solid #2A3A4A;display:flex;align-items:center;gap:8px;">
-                    <span style="font-size:11px;">&#128279;</span>
-                    <div><div style="font-size:9px;font-weight:600;color:#fff;">Webhook URL</div><div style="font-size:7px;color:#666;">HTTPS webhook</div></div>
-                  </div>
-                  <div style="padding:8px 10px;display:flex;align-items:center;gap:8px;opacity:0.4;">
-                    <span style="font-size:11px;">&#128202;</span>
-                    <div><div style="font-size:9px;font-weight:600;color:#fff;">Google Sheets</div><div style="font-size:7px;color:#4ECDC4;">Coming soon</div></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="hdp-caption">Five destination types including webhooks, APIs, and local endpoints</div>
-        </div>
+        <figure class="hero-shot">
+          <img src="/assets/screenshots/img-4714.png" alt="VitalPort home screen with Export, Settings, Apple Health refresh, and today’s briefing preview" width="470" height="1024" loading="eager" decoding="async" fetchpriority="high">
+          <figcaption>Export and Settings up top, Apple Health refresh, and a snapshot of today’s briefing—all without signing in.</figcaption>
+        </figure>
+        <figure class="hero-shot">
+          <img src="/assets/screenshots/img-4715.png" alt="VitalPort today’s briefing grid showing steps, sleep, HRV, resting heart rate, training, and weight" width="470" height="1024" loading="eager" decoding="async">
+          <figcaption>Today’s briefing expands into a grid of your selected metrics: steps, sleep, HRV, resting heart rate, training, and weight.</figcaption>
+        </figure>
+        <figure class="hero-shot">
+          <img src="/assets/screenshots/img-4716.png" alt="VitalPort Destinations list for JSON file, CSV file, local endpoint, cloud endpoint, webhook, and Google Sheets" width="470" height="1024" loading="eager" decoding="async">
+          <figcaption>Route data to local files, your network, HTTPS endpoints, or webhooks—only when you configure it.</figcaption>
+        </figure>
+        <figure class="hero-shot">
+          <img src="/assets/screenshots/img-4717.png" alt="VitalPort HRV screen with weekly trend chart and recent daily values" width="470" height="1024" loading="eager" decoding="async">
+          <figcaption>Drill into a metric for the latest reading, range tabs, a trend chart, and recent days—shown here with HRV.</figcaption>
+        </figure>
+        <figure class="hero-shot">
+          <img src="/assets/screenshots/img-4718.png" alt="VitalPort Export and Share sheet with JSON and CSV format and date range options" width="470" height="1024" loading="eager" decoding="async">
+          <figcaption>Choose JSON or CSV, pick a date range, and read how the export profile maps coaching snapshot fields before you share.</figcaption>
+        </figure>
       </div>
     </div>
 
@@ -1055,38 +801,6 @@
           <span class="workout-val green">54 ms</span>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- APP SCREENSHOTS -->
-<section class="app-showcase-section">
-  <div class="container">
-    <div class="section-header reveal">
-      <p class="section-label">Inside the app</p>
-      <h2>Dashboard, export,<br><span style="color: var(--steel);">and destinations.</span></h2>
-    </div>
-    <div class="showcase-grid reveal">
-      <figure class="showcase-card">
-        <img src="/assets/screenshots/img-4714.png" alt="VitalPort home screen with Export, Settings, Apple Health refresh, and today’s briefing preview" width="470" height="1024" loading="lazy" decoding="async">
-        <figcaption>Export and Settings up top, Apple Health refresh, and a snapshot of today’s briefing—all without signing in.</figcaption>
-      </figure>
-      <figure class="showcase-card">
-        <img src="/assets/screenshots/img-4715.png" alt="VitalPort today’s briefing grid showing steps, sleep, HRV, resting heart rate, training, and weight" width="470" height="1024" loading="lazy" decoding="async">
-        <figcaption>Today’s briefing expands into a grid of your selected metrics: steps, sleep, HRV, resting heart rate, training, and weight.</figcaption>
-      </figure>
-      <figure class="showcase-card">
-        <img src="/assets/screenshots/img-4716.png" alt="VitalPort Destinations list for JSON file, CSV file, local endpoint, cloud endpoint, webhook, and Google Sheets" width="470" height="1024" loading="lazy" decoding="async">
-        <figcaption>Route data to local files, your network, HTTPS endpoints, or webhooks—only when you configure it.</figcaption>
-      </figure>
-      <figure class="showcase-card">
-        <img src="/assets/screenshots/img-4717.png" alt="VitalPort HRV screen with weekly trend chart and recent daily values" width="470" height="1024" loading="lazy" decoding="async">
-        <figcaption>Drill into a metric for the latest reading, range tabs, a trend chart, and recent days—shown here with HRV.</figcaption>
-      </figure>
-      <figure class="showcase-card">
-        <img src="/assets/screenshots/img-4718.png" alt="VitalPort Export and Share sheet with JSON and CSV format and date range options" width="470" height="1024" loading="lazy" decoding="async">
-        <figcaption>Choose JSON or CSV, pick a date range, and read how the export profile maps coaching snapshot fields before you share.</figcaption>
-      </figure>
     </div>
   </div>
 </section>
