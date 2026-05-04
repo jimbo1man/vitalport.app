@@ -1,0 +1,5 @@
+# Cursor / Claude local settings
+.claude/
+
+# Supabase CLI local cache (linked project, versions, etc.)
+supabase/.temp/
