@@ -356,7 +356,7 @@ MANUAL_TEMPLATE = """<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>User Manual — VitalPort</title>
+<title>User Manual | VitalPort</title>
 <meta name="description" content="VitalPort user manual: export Apple Health as JSON or CSV, destinations, schedules, diagnostics, and support.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
