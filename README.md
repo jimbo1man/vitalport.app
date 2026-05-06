@@ -1,6 +1,6 @@
 # Vitalport.app
 
-Landing page and waitlist capture for [vitalport.app](https://vitalport.app) — an iOS app that exports and routes Apple Health data with workout-type fidelity.
+Landing page and waitlist capture for [vitalport.app](https://vitalport.app) — an iOS app that exports and routes Health data with workout-type fidelity.
 
 ## Stack
 

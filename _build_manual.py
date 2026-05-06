@@ -58,7 +58,7 @@ H3_LITERALS = frozenset(
         "Set Up a Schedule",
         "Open Diagnostics",
         "What Diagnostics Shows",
-        "Refresh Apple Health Permissions",
+        "Refresh Health Permissions",
     }
 )
 
@@ -112,7 +112,7 @@ def fmt_default(slug: str, body: list[str]) -> str:
             continue
 
         if line.startswith(
-            ("Open VitalPort", "Tap Connect Apple Health", "Tap Sync Now", "Tap Export", "From the dashboard, tap Sync Now")
+            ("Open VitalPort", "Tap Connect Health", "Tap Sync Now", "Tap Export", "From the dashboard, tap Sync Now")
         ):
             steps: list[str] = []
             while i < len(body):
@@ -236,7 +236,7 @@ def fmt_default(slug: str, body: list[str]) -> str:
                 i += 2
                 continue
 
-        if line == "Reads your Apple Health data on your iPhone":
+        if line == "Reads your Health data on your iPhone":
             items = []
             while i < len(body):
                 s = body[i]
@@ -264,7 +264,7 @@ def fmt_default(slug: str, body: list[str]) -> str:
                 )
             continue
 
-        if slug == "setup" and line == "Connect Apple Health":
+        if slug == "setup" and line == "Connect Health":
             out.append("<h3>" + esc(line) + "</h3>")
             i += 1
             continue
@@ -357,7 +357,7 @@ MANUAL_TEMPLATE = """<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>User Manual | VitalPort</title>
-<meta name="description" content="VitalPort user manual: export Apple Health as JSON or CSV, destinations, schedules, diagnostics, and support.">
+<meta name="description" content="VitalPort user manual: export Health as JSON or CSV, destinations, schedules, diagnostics, and support.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -655,7 +655,7 @@ MANUAL_TEMPLATE = """<!DOCTYPE html>
     <article class="manual-wrap">
       <p class="manual-eyebrow">Documentation</p>
       <h1>User Manual</h1>
-      <p class="manual-lead">Export, route, and own your Apple Health data.</p>
+      <p class="manual-lead">Export, route, and own your Health data.</p>
 {article}
     </article>
   </div>
