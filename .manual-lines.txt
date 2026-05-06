@@ -3,12 +3,15 @@ User Manual
 Export, route, and own your Health data.
 vitalport.app
 Who This Is For
-VitalPort is designed for:
-People who want full control and ownership of their Health data
-Developers routing health data into their own systems or AI pipelines
-Individuals who need to share health metrics with a doctor, coach, or care provider
-Anyone who has hit the wall of Health's export limitations
-VitalPort is not a replacement for Health or a fitness tracking app. It does not analyze your data or generate recommendations on its own. It moves your data, cleanly and privately, wherever you need it to go.
+VitalPort is for:
+People who want ownership of their Health data, not just a dashboard
+Developers and builders routing health data into their own systems, automations, or AI workflows
+Anyone who wants to export and use their data outside the Apple ecosystem
+People sharing structured health data with a coach, doctor, or care team
+Anyone who has hit the limits of Apple Health and needs their data to actually move
+VitalPort does not try to replace Apple Health or act as a fitness app.
+It does not analyze your data or generate recommendations.
+It gives you clean, structured exports and lets you decide what to do with them.
 First Export: Start Here
 Before exploring any other feature, do this first. It takes under two minutes and confirms VitalPort is working correctly on your device.
 Open VitalPort on your iPhone.
