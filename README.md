@@ -1,4 +1,4 @@
-# Vitalport.app
+# VitalPort.app
 
 Landing page and waitlist capture for [vitalport.app](https://vitalport.app) — an iOS app that exports and routes Health data with workout-type fidelity.
 

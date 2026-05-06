@@ -73,15 +73,15 @@ Deno.serve(async (req) => {
 
   const emailJobs = [
     resend.emails.send({
-      from: `Vitalport <hello@${fromDomain}>`,
+      from: `VitalPort <hello@${fromDomain}>`,
       to: email,
       subject: "You're on the list.",
-      text: "You'll be the first to know when Vitalport launches on the App Store.\n\nThanks for your interest.\n\n- The Vitalport Team",
+      text: "You'll be the first to know when VitalPort launches on the App Store.\n\nThanks for your interest.\n\n- The VitalPort Team",
     }),
     resend.emails.send({
       from: `notifications@${fromDomain}`,
       to: adminEmail,
-      subject: "New Vitalport waitlist signup",
+      subject: "New VitalPort waitlist signup",
       text: `Email: ${email}\nSource: ${source}\nSigned up: ${data.created_at}`,
     }),
   ];
