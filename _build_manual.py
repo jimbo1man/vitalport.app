@@ -59,6 +59,7 @@ H3_LITERALS = frozenset(
         "Open Diagnostics",
         "What Diagnostics Shows",
         "Refresh Health Permissions",
+        "Google Sheets Export",
     }
 )
 
@@ -157,6 +158,8 @@ def fmt_default(slug: str, body: list[str]) -> str:
                 if term in ("Configure a Destination", "Test Your Destination") or term.startswith("Note:"):
                     break
                 if term in titles:
+                    break
+                if term in H3_LITERALS:
                     break
                 desc = body[i + 1]
                 pairs.append((term, desc))
@@ -292,7 +295,7 @@ def fmt_default(slug: str, body: list[str]) -> str:
             ranges = [
                 ("Today", "Today's data only"),
                 ("Last 7 Days", "Rolling 7-day window"),
-                ("30 Days", "Coming soon"),
+                ("Last 30 Days", "Rolling 30-day window"),
                 ("90 Days", "Coming soon"),
             ]
             for t, d in ranges:

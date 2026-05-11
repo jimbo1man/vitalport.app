@@ -28,7 +28,7 @@ What VitalPort Does
 What It Does
 Reads your Health data on your iPhone
 Exports data as JSON or CSV files you can use anywhere
-Sends data automatically to a URL, webhook, or API you configure
+Sends data automatically to webhook destinations, spreadsheet workflows, APIs, and automation systems you configure
 Lets you choose specific date ranges
 Runs background sync to keep your data current
 What It Does Not Do
@@ -45,7 +45,7 @@ iOS 17.0 or later
 Health Data Source
 Apple Watch or any app that writes to Health
 App Version
-v0.10.52 (Public Beta)
+v0.10.55
 Setup
 Connect Health
 On first launch, tap the Connect Health banner on the dashboard. VitalPort will show the standard Health permissions sheet. Select which data types to share.
@@ -92,10 +92,11 @@ Sync Now
 Tap Sync Now on the dashboard to manually pull the latest data from Health, refresh the local cache, and send to your active destination if one is configured.
 Exporting Your Data
 There are two ways to get data out of VitalPort: save a file to your device, or send it automatically to a destination you configure.
+VitalPort exports are intentionally portable and interoperable so your data can move into the tools and workflows you already use.
 Save a File (Export and Share)
 Use this to generate a file and open it via the iOS share sheet.
 From the dashboard, tap Export in the navigation bar.
-Choose your Date Range: Today or Last 7 Days.
+Choose your Date Range: Today, Last 7 Days, or Last 30 Days.
 Choose your Format: JSON or CSV.
 Tap Generate.
 Tap Export and Share.
@@ -105,14 +106,14 @@ Export Formats
 JSON
 Structured daily snapshots. Best for developers, AI ingestion, and API use. All metric keys are always present; missing data appears as null rather than being omitted.
 CSV
-Flat rows and columns. Best for spreadsheets: Excel, Google Sheets, Numbers.
+Flat rows and columns designed for spreadsheets, dashboards, analytics tools, and automation workflows.
 Date Ranges
 Today
 Today's data only
 Last 7 Days
 Rolling 7-day window
-30 Days
-Coming soon
+Last 30 Days
+Rolling 30-day window
 90 Days
 Coming soon
 Send Data to an Endpoint
@@ -128,6 +129,23 @@ Cloud Endpoint
 POSTs to a remote HTTPS endpoint
 Webhook URL
 POSTs the JSON export envelope to any configured URL
+Google Sheets
+Sends exports to a Google Apps Script webhook endpoint for spreadsheet workflows.
+Notion
+Sends exports into Notion workflows using an automation or relay endpoint.
+Google Sheets Export
+VitalPort can send exports directly into Google Sheets using a Google Apps Script webhook endpoint.
+Recommended settings:
+Format: CSV
+Layout: Long
+Long-format CSV works best for spreadsheets, dashboards, and analytics workflows.
+Basic setup flow:
+1. Create a Google Sheet
+2. Open Extensions → Apps Script
+3. Deploy a Web App endpoint
+4. Paste the Web App URL into VitalPort
+5. Send exports from VitalPort
+Note: The Apps Script Web App URL must end in /exec
 Configure a Destination
 From the dashboard, tap Export, then tap Destinations.
 Select a destination type.
@@ -203,6 +221,6 @@ vitalport.app
 App Store
 Use the App Store support link on the VitalPort listing for questions, feedback, or bug reports.
 App Version
-v0.10.52 (Public Beta)
+v0.10.55
 To report a bug, include your iOS version, iPhone model, and a description of what happened. A screenshot of the Diagnostics screen is the most helpful thing you can send.
 VitalPort. Your health data, your rules.
